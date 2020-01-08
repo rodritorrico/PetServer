@@ -37,7 +37,6 @@ app.get('/', function (req, res) {
 
 app.get('/feedPet',async (request, response)=> {
     userWantsToFeedPet = await  (await webDataDocRef.get()).data().feedCat;
-   
     response.send(userWantsToFeedPet);
 })
 
