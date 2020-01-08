@@ -37,12 +37,15 @@ app.get('/', function (req, res) {
 
 app.get('/feedPet',async (request, response)=> {
     userWantsToFeedPet = await  (await webDataDocRef.get()).data().feedCat;
-    await webDataDocRef.update({feedCat: false});
+   
     response.send(userWantsToFeedPet);
 })
 
 app.post('/thingData', async (request, response)=>{
     let thingData = request.body;
+    if(thingData === "6.5"){
+        await webDataDocRef.update({feedCat: false});
+    }
     await webDataDocRef.update({lastData: thingData});
     
     thingCollecntion.add({data: thingData});
@@ -56,8 +59,8 @@ app.get('/getFeedTimes', async (request, response)=>{
 
 app.get('/getPlatePercentage', async(request, response) =>{
     lastData = await (await webDataDocRef.get()).data().lastData;
-    const limitData = 9;
-    let calculatedPlatePercentage = Math.round((lastData * 100)/limitData);
+    const limitData = 7;
+    let calculatedPlatePercentage = Math.round((10 - lastData )*33.33);
     await webDataDocRef.update({platePercentage: calculatedPlatePercentage});
 
     response.send(calculatedPlatePercentage.toString());
