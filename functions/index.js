@@ -5,6 +5,14 @@ var serviceAccount = require("./petappserver2-firebase-adminsdk-42nn1-d0927028bb
 var express = require('express');
 var app = express();
 
+const bodyParser = require('body-parser');
+
+const cors = require('cors');
+
+app.use(bodyParser.text());
+app.use(bodyParser.json());
+app.use(cors());
+
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
