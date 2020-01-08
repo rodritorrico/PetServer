@@ -42,7 +42,7 @@ app.get('/feedPet',async (request, response)=> {
 
 app.post('/thingData', async (request, response)=>{
     let thingData = request.body;
-    if(thingData === "6.5"){
+    if(thingData <= "6.5"){
         await webDataDocRef.update({feedCat: false});
     }
     await webDataDocRef.update({lastData: thingData});
